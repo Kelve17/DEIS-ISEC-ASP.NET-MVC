@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Candidatura>
+    @using DEIS_ESTAGIOS.Models
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Aluno.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NivelPreferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        @{
+            var alunos = (List<Aluno>)ViewBag.Alunos;
+            var nome = alunos.SingleOrDefault(x => x.AlunoId == item.AlunoId).Nome+" "+ alunos.SingleOrDefault(x => x.AlunoId == item.AlunoId).Apelido;
+        }
+        <td>
+            @nome
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NivelPreferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasNaoConcluidas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasConcluidas)
+        </td>
+        <td>
+            @Html.ActionLink("Ver Perfil Aluno", "Details", "Alunos",new { id = item.AlunoId },new { @class = "btn btn-info btn-md" }) 
+            @Html.ActionLink("Aceitar", "AceitarCandidatura", "Empresas", new { id = item.CandidaturaId }, new { @class = "btn btn-info btn-md" })
+        </td>
+    </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Voltar", "MinhasPropostas2", "Propostas", null,new {@class="btn btn-info btn-md" }) 

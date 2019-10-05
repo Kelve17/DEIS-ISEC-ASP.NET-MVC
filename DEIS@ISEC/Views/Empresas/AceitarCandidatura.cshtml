@@ -1,0 +1,56 @@
+﻿@model DEIS_ESTAGIOS.Models.Candidatura
+
+@{
+    ViewBag.Title = "AceitarCandidatura";
+}
+
+<h2>AceitarCandidatura</h2>
+
+<h3>De certeza que pretende aprovar a candidatura?</h3>
+<div>
+    <h4>Candidatura</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Aluno.Nome)
+        </dt>
+
+        <dd>
+            @ViewBag.NomeAluno
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aluno.Ramo)
+        </dt>
+
+        <dd>
+            @ViewBag.Ramo
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisciplinasNaoConcluidas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisciplinasConcluidas)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Confirmar", "ConfirmarCandidatura", new { id = @Model.CandidaturaId }, new { @class = "btn btn-info btn-md", style = "white-space: normal" })
+        @Html.ActionLink("Voltar", "CandidaturasRecebidas","Candidaturas", routeValues: null, htmlAttributes: new { @class = "btn btn-info btn-md", style = "white-space: normal" })
+    </div>
+    }
+</div>

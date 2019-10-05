@@ -1,0 +1,99 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h2>Propostas Orientadas por si</h2>
+
+
+<p>
+    @Html.ActionLink("Nova Proposta", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nome do Aluno
+        </th>
+        <th>
+            Número do Aluno
+        </th>
+        <th>
+            Ramo Inscrito
+        </th>
+        <th>
+            Disciplinas Concluídas
+        </th>
+        <th>
+            Disciplinas Não Concluídas
+        </th>
+        <th>
+            Titulo da Proposta
+        </th>
+        <th>
+            Objectivos
+        </th>
+        <th>
+            Ramo da Proposta
+        </th>
+        <th>
+            Localização
+        </th>
+        <th>
+            Data de Início
+        </th>
+        <th>
+            Data de Fim
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Propostas)
+    {
+    <tr>
+        @foreach (var c in Model.Candidaturas)
+        {
+            if (c.PropostaId == item.PropostaId)
+            {
+                foreach (var a in Model.Alunos)
+                {
+                    if (a.AlunoId == c.AlunoId)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => a.Nome) @Html.DisplayFor(modelItem => a.Apelido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.NumeroAluno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => a.Ramo)
+                        </td>
+                    }
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => c.DisciplinasNaoConcluidas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => c.DisciplinasConcluidas)
+                </td>
+            }
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objectivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localizacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+    </tr>
+    }
+
+</table>

@@ -1,0 +1,90 @@
+﻿@model DEIS_ESTAGIOS.Models.Proposta
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Dados</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PropostaId)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nome da Empresa</label>
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Empresa.Nome, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.NomeEmpresa, disabled = "disabled", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ramo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Ramo, htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.Ramo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Localizacao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Localizacao, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Localizacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (User.IsInRole("Alunos"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvaliacaoAlunoEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AvaliacaoAlunoEmpresa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AvaliacaoAlunoEmpresa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        @if (User.IsInRole("Empresas"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvaliacaoEmpresaALuno, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AvaliacaoEmpresaALuno, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AvaliacaoEmpresaALuno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        @if (User.IsInRole("Docentes") || User.IsInRole("Comissao"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.AvaliacaoDocenteAluno, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AvaliacaoDocenteAluno, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AvaliacaoDocenteAluno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-info btn-md" />
+                @Html.ActionLink("Voltar", "AvaliaEmpresa", null, new { @class = "btn btn-info btn-md" })
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Candidatura>
+@using DEIS_ESTAGIOS.Models
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Título da Proposta
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NivelPreferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @{ 
+            var propostas = (List<Proposta>) ViewBag.Propostas;
+            var titulo = propostas.SingleOrDefault(x => x.PropostaId == item.PropostaId).Titulo;
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Aluno.Nome) @Html.DisplayFor(modelItem => item.Aluno.Apelido)
+        </td>
+        <td>
+            @titulo
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NivelPreferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasNaoConcluidas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasConcluidas)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Voltar", "ListaALunos","Alunos", null,new { @class = "btn btn-info btn-md" })
+</div>

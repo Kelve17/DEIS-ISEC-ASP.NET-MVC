@@ -1,0 +1,285 @@
+﻿@using DEIS_ESTAGIOS.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Estagios Deis", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (User.IsInRole(Role.Empresas.ToString()))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Propostas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Submeter Proposta", "Create", "Propostas")</li>
+                                <li>@Html.ActionLink("Minhas Propostas", "MinhasPropostas", "Propostas")</li>
+                                <li>@Html.ActionLink("Propostas Arquivadas", "AntigasPropostas", "Propostas")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Candidatos">
+                                Candidatos
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Candidaturas Pendentes", "CandidaturasRecebidas", "Candidaturas")</li>
+                                <li>@Html.ActionLink("Candidatos Por Propostas", "MinhasPropostas2", "Propostas")</li>
+                                <li>@Html.ActionLink("Avaliar Estagiários", "AvaliaAluno", "Alunos")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Mensagens Recebidas", "MensagensRecebidas", "Mensagens")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "MensagensEnviadas", "Mensagens")</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole(Role.Alunos.ToString()))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Propostas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Propostas Disponíveis", "ListaPropostas", "Alunos")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Candidaturas">
+                                Candidaturas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Minhas Candidaturas", "MinhasCandidaturas", "Candidaturas")</li>
+                                <li>@Html.ActionLink("Candidaturas Aprovadas", "CandidaturasAprovadas", "Candidaturas")</li>
+                                <li>@Html.ActionLink("Candidaturas Não Aprovadas", "CandidaturasReprovadas", "Candidaturas")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Empresas">
+                                Empresas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Avaliar Empresa", "AvaliaEmpresa", "Empresas")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Mensagens Recebidas", "MensagensRecebidas", "Mensagens")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "MensagensEnviadas", "Mensagens")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Role.Docentes.ToString()) || User.IsInRole("Comissao"))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="Propostas">
+                                Propostas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Submeter Proposta", "Create", "Propostas")</li>
+                                <li>@Html.ActionLink("Minhas Propostas", "MinhasPropostas", "Propostas")</li>
+                                <li>@Html.ActionLink("Propostas Disponíveis", "PropostasDocentes", "Propostas")</li>
+                                <li>@Html.ActionLink("Propostas Arquivadas", "AntigasPropostas", "Propostas")</li>
+                                <li>@Html.ActionLink("Propostas Orientadas", "PropostasOrientadas", "Propostas")</li>
+                                @if (User.IsInRole("Comissao"))
+                                {
+                                    <li>@Html.ActionLink("Definir Orientador", "DefinirOrientadorEstagio", "Propostas")</li>
+                                    <li>@Html.ActionLink("Definir Data de Defesa", "DefinirDataDefesa", "Propostas")</li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Candidatos">
+                                Candidatos
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Candidaturas Pendentes", "CandidaturasRecebidas", "Candidaturas")</li>
+                                <li>@Html.ActionLink("Candidatos Por Propostas", "MinhasPropostas2", "Propostas")</li>
+                                <li>@Html.ActionLink("Avaliar Alunos", "AvaliaAluno", "Alunos")</li>
+                                <li>@Html.ActionLink("Lista de Aluno", "Index", "Alunos")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Mensagens Recebidas", "MensagensRecebidas", "Mensagens")</li>
+                                <li>@Html.ActionLink("Mensagens Enviadas", "MensagensEnviadas", "Mensagens")</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Comissao"))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Alunos">
+                                Alunos
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Definir Número De Estágios", "DefinirNumeroEstagios", "Alunos")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Estatisticas">
+                                Estatísticas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Estatísticas", "Estatisticas", "Docentes")</li>
+                            </ul>
+                        </li>
+
+                    }
+
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Conta">
+                                Conta
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Criar Nova Conta", "Register", "Account")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Alunos">
+                                Alunos
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Alunos", "Index", "Alunos")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Propostas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Propostas", "Index", "Propostas")</li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Empresas">
+                                Empresas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Empresas", "Index", "Empresas")</li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Docentes">
+                                Docentes
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Docentes", "Index", "Docentes")</li>
+                                <li>@Html.ActionLink("Definir Comissão", "DefinirComissao", "Docentes")</li>
+                                <li>@Html.ActionLink("Ver Comissão", "ListaComissao", "Docentes")</li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Candidaturas">
+                                Candidaturas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Candidaturas", "Index", "Candidaturas")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Mensagens
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Mensagens", "TodasAsMensagens", "Mensagens")</li>
+                            </ul>
+                        </li>
+
+                    }
+
+                    @if (!User.IsInRole("Admin") && !User.IsInRole("Alunos") && !User.IsInRole("Docentes") && !User.IsInRole("Comissao") && !User.IsInRole("Empresas"))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#Propostas">
+                                Propostas
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Lista de Estágios por região", "PropostasRoleGeral", "Propostas", new { id = 1 }, null)</li>
+                                <li>@Html.ActionLink("Lista de Projectos por região", "PropostasRoleGeral", "Propostas", new { id = 2 }, null)</li>
+                                <li>@Html.ActionLink("Lista de Estágios por ramo", "PropostasRoleGeral", "Propostas", new { id = 3 }, null)</li>
+                                <li>@Html.ActionLink("Lista de Propostas por ramo", "PropostasRoleGeral", "Propostas", new { id = 4 }, null)</li>
+
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ISEC</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

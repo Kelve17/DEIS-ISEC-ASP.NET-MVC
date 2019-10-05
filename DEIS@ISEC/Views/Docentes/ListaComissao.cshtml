@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Docente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Membros da Comissão de estágios</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apelido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morada)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apelido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Morada)
+            </td>
+            <td>
+                @Html.ActionLink("Remover da Comissão", "RemoveComissao", new { id = item.DocenteId }, new { @class = "btn btn-info btn-md" })
+            </td>
+        </tr>
+    }
+
+</table>
+

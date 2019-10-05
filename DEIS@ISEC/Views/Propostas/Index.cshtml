@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Proposta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Propostas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enquadramento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objectivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CondicoesAcesso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localizacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvaliacaoAlunoEmpresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvaliacaoEmpresaALuno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvaliacaoDocenteAluno)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.PropostaId }, new { @class = "btn btn-info btn-md" })
+            @Html.ActionLink("Detalhes", "Details", new { id = item.PropostaId }, new { @class = "btn btn-info btn-md" })
+            @Html.ActionLink("Apagar", "Delete", new { id = item.PropostaId }, new { @class = "btn btn-info btn-md" })
+
+        </td>
+    </tr>
+}
+
+</table>

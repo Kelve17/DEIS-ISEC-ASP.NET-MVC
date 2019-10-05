@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Proposta>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enquadramento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objectivos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CondicoesAcesso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enquadramento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objectivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CondicoesAcesso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localizacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+    </tr>
+}
+
+</table>

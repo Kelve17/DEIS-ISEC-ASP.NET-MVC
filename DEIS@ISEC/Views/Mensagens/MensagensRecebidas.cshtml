@@ -1,0 +1,82 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h3>Caixa de Entrada</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Remetente
+        </th>
+        <th>
+            Data
+        </th>
+        <th>
+            Hora
+        </th>
+        <th>
+            Assunto
+        </th>
+        <th>
+            Lida
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Mensagens)
+    {
+    <tr>
+        @{
+            var remetente = "N/D";
+            if (User.IsInRole("Alunos"))
+            {
+                if (Model.Docentes.Any(x => x.UserId == item.RemetenteId))
+                {
+                    remetente = Model.Docentes.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome;
+                }
+                else if (Model.Empresas.Any(x => x.UserId == item.RemetenteId))
+                {
+                    remetente = Model.Empresas.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome;
+                }
+            }
+            if (User.IsInRole("Comissao") || User.IsInRole("Docentes") || User.IsInRole("Empresas"))
+            {
+                if (Model.Alunos.Any(x => x.UserId == item.RemetenteId))
+                {
+                    remetente = Model.Alunos.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome + " " + Model.Alunos.SingleOrDefault(x => x.UserId == item.RemetenteId).Apelido;
+                }
+            }
+        }
+        <td>
+            @remetente
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data.Hour):@Html.DisplayFor(modelItem => item.Data.Minute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        @{
+            if (item.StatusMensagem.ToString() == "Entregue")
+            {
+                <td align="center" style="text-align:left; font-size:200%; font-weight:bold; color:green;">
+                    <p> &#9745 </p>
+                </td>
+            }
+            else
+            {
+                <td align="center" style="text-align:left; font-size:200%; font-weight:bold; color:red;">
+                    <p> &#9746;</p>
+                </td>
+            }
+        }
+        <td>
+            @Html.ActionLink("Ler Mensagem", "LerMensagem", new { id = item.MensagemId }, new { @class = "btn btn-info btn-md" })
+        </td>
+    </tr>
+    }
+
+</table>
+

@@ -1,0 +1,78 @@
+﻿@model DEIS_ESTAGIOS.Models.Aluno
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes do aluno</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ramo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apelido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apelido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Morada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telemovel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telemovel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroEstágios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroEstágios)
+        </dd>
+
+    </dl>
+</div>
+@if (User.IsInRole("Admin"))
+{
+
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.NumeroAluno }, new { @class = "btn btn-info btn-md"}) 
+        @Html.ActionLink("Voltar", "Index",null, new { @class = "btn btn-info btn-md" })
+
+    </p>
+}

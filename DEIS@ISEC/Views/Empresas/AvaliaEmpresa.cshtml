@@ -1,0 +1,53 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h3>Empresas para a qual estagiou</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome da Empresa
+        </th>
+        <th>
+            Titulo da Proposta
+        </th>
+        <th>
+            Ramo da Proposta
+        </th>
+        <th>
+            Data de Início
+        </th>
+        <th>
+            Data de Fim
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Candidaturas)
+    {
+        <tr>
+            @foreach (var p in Model.Propostas)
+            {
+                if (item.PropostaId == p.PropostaId && p.EmpresaId != null && p.AvaliacaoAlunoEmpresa == null)
+                {
+                    <td>
+                        @Model.Empresas.SingleOrDefault(x => x.EmpresaId == p.EmpresaId).Nome
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.Ramo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.DataFim)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Avaliar", "ConfirmaAvaliacao", new { id = item.CandidaturaId }, new { @class = "btn btn-info btn-md" })
+                    </td>
+                }
+            }
+        </tr>
+    }
+</table>

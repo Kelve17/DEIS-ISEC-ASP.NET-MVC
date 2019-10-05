@@ -1,0 +1,106 @@
+﻿@model DEIS_ISEC.SupportModels.Estatisticas
+
+<h4>Estatisticas</h4>
+<hr />
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td align="right">
+            <b>Total de Estágios</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.TotalEstagios)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Total de Projectos</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.TotalProjetos)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Total de Candidaturas</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.TotalCandidaturas)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Total de Empresas</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.TotalEmpresas)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Total de Alunos</b>
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TotalAlunos)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Total de Docentes</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.TotalDocentes)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Empresa com maior número de propostas</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.EmpresaComMaisPropostas)
+        </td>
+    </tr>
+    <tr>
+        <td align="right">
+            <b>Aluno com mais candidaturas</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.AlunoComMaisCandidaturas)
+        </td>
+    </tr>
+
+    <tr>
+        <td align="right">
+            <b>Docentes com maior número de propostas</b>
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.DocentesComMaisPropostas)
+        </td>
+
+    </tr>
+
+    <tr>
+        <td align="right">
+            <b>Empresas mais procuradas</b>
+        </td>
+        @foreach(var item in Model.EmpresasMaisProcuradas)
+        {
+            <td>
+                @item
+            </td>
+        }
+    </tr>
+</table>

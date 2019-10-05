@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Empresa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Empresas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AreaNegocio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Website)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Endereco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaNegocio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Website)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.EmpresaId }, new { @class = "btn btn-info btn-md" })
+            @Html.ActionLink("Detalhes", "Details", new { id = item.EmpresaId }, new { @class = "btn btn-info btn-md" })
+            @Html.ActionLink("Apagar", "Delete", new { id = item.EmpresaId }, new { @class = "btn btn-info btn-md" })
+
+        </td>
+    </tr>
+}
+
+</table>

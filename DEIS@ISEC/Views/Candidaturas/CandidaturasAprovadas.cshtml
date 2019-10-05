@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Candidatura>
+    <h2>Candidaturas que lhe foram aprovadas</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NivelPreferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NivelPreferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasNaoConcluidas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasConcluidas)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CandidaturaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CandidaturaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CandidaturaId })
+        </td>
+    </tr>
+}
+
+</table>

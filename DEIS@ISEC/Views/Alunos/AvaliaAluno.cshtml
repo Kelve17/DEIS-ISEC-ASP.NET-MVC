@@ -1,0 +1,73 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h3>Alunos Orientados por si</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome do Aluno
+        </th>
+        <th>
+            Número do Aluno
+        </th>
+        <th>
+            Ramo Inscrito
+        </th>
+        <th>
+            Titulo da Proposta
+        </th>
+        <th>
+            Ramo da Proposta
+        </th>
+        <th>
+            Data de Início
+        </th>
+        <th>
+            Data de Fim
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Propostas)
+    {
+        <tr>
+            @foreach (var c in Model.Candidaturas)
+            {
+                if (c.CandidaturaId == item.CandidaturaId)
+                {
+                    foreach (var a in Model.Alunos)
+                    {
+                        if (a.AlunoId == c.AlunoId)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => a.Nome) @Html.DisplayFor(modelItem => a.Apelido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => a.NumeroAluno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => a.Ramo)
+                            </td>
+                        }
+                    }
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.ActionLink("Avaliar", "ConfirmaAvaliacao", new { id = item.CandidaturaId }, new { @class = "btn btn-info btn-md" })
+            </td>
+        </tr>
+    }
+
+</table>

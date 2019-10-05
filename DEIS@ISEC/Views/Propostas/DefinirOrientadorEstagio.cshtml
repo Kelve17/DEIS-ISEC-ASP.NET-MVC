@@ -1,0 +1,85 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h3>Definir Orientadores para Estágios</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome do Aluno
+        </th>
+        <th>
+            Número do Aluno
+        </th>
+        <th>
+            Ramo Inscrito
+        </th>
+        <th>
+            Nome da Empresa
+        </th>
+        <th>
+            Titulo da Proposta
+        </th>
+        <th>
+            Ramo da Proposta
+        </th>
+        <th>
+            Data de Início
+        </th>
+        <th>
+            Data de Fim
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Propostas)
+    {
+        <tr>
+            @foreach (var c in Model.Candidaturas)
+            {
+                if (c.CandidaturaId == item.CandidaturaId)
+                {
+                    foreach (var a in Model.Alunos)
+                    {
+                        if (a.AlunoId == c.AlunoId)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => a.Nome) @Html.DisplayFor(modelItem => a.Apelido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => a.NumeroAluno)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => a.Ramo)
+                            </td>
+                        }
+                    }
+                }
+            }
+            @foreach(var e in Model.Empresas)
+            {
+                if(e.EmpresaId == item.EmpresaId)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem=>e.Nome)
+                    </td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.ActionLink("Definir Orientador", "SeleccionaOrientador", new { id = item.PropostaId }, new { @class = "btn btn-info btn-md" })
+            </td>
+        </tr>
+    }
+
+</table>

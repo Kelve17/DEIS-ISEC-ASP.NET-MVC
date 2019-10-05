@@ -1,0 +1,76 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h2>Lista de Alunos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome do Aluno
+        </th>
+        <th>
+            Número do Aluno
+        </th>
+        <th>
+            Ramo
+        </th>
+        <th>
+            Morada
+        </th>
+        <th>
+            Telemóvel
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Candidaturas submetidas
+        </th>
+        <th>
+            Candidaturas aprovadas
+        </th>
+        <th>
+            Candidaturas reprovadas
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Alunos)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome) @Html.DisplayFor(modelItem => item.Apelido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroAluno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telemovel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        @{
+            var ncandidaturas = Model.Candidaturas.Where(x => x.AlunoId == item.AlunoId).ToList().Count().ToString();
+            var ncandidaturasAprovadas = Model.Candidaturas.Where(x => x.AlunoId == item.AlunoId && x.CandidaturaAceite == true).ToList().Count().ToString();
+            var ncandidaturasReprovadas = Model.Candidaturas.Where(x => x.AlunoId == item.AlunoId && x.CandidaturaRejeitada == true).ToList().Count().ToString();
+        }
+        <td>@ncandidaturas</td>
+        <td>@ncandidaturasAprovadas</td>
+        <td>@ncandidaturasReprovadas</td>
+        <td>
+            @Html.ActionLink("Candidaturas", "CandidaturasAluno","Candidaturas", new { id = item.NumeroAluno }, new { @class = "btn btn-info btn-md" })
+        </td>
+        <td>
+            @Html.ActionLink("Mensagem", "Details", new { id = item.NumeroAluno }, new { @class = "btn btn-info btn-md" })
+        </td>
+    </tr>
+    }
+
+</table>
+

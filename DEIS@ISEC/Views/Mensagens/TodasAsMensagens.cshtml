@@ -1,0 +1,99 @@
+﻿@model DEIS_ISEC.Models.ViewModels
+
+<h3>Caixa de Entrada</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Remetente
+        </th>
+        <th>
+            Destinatário
+        </th>
+        <th>
+            Data
+        </th>
+        <th>
+            Hora
+        </th>
+        <th>
+            Assunto
+        </th>
+        <th>
+            Lida
+        </th>
+        <th>
+            Mensagem
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Mensagens)
+    {
+    <tr>
+        @{
+            var remetente = "N/D";
+            var destinatario = "N/D";
+
+            if (Model.Docentes.Any(x => x.UserId == item.RemetenteId))
+            {
+                remetente = Model.Docentes.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome + " " + Model.Docentes.SingleOrDefault(x => x.UserId == item.RemetenteId).Apelido;
+            }
+            if (Model.Docentes.Any(x => x.UserId == item.DestinarioId))
+            {
+                destinatario = Model.Docentes.SingleOrDefault(x => x.UserId == item.DestinarioId).Nome + " " + Model.Docentes.SingleOrDefault(x => x.UserId == item.DestinarioId).Apelido;
+            }
+            if (Model.Empresas.Any(x => x.UserId == item.RemetenteId))
+            {
+                remetente = Model.Empresas.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome;
+            }
+            if (Model.Empresas.Any(x => x.UserId == item.DestinarioId))
+            {
+                destinatario = Model.Empresas.SingleOrDefault(x => x.UserId == item.DestinarioId).Nome;
+            }
+            if (Model.Alunos.Any(x => x.UserId == item.RemetenteId))
+            {
+                remetente = Model.Alunos.SingleOrDefault(x => x.UserId == item.RemetenteId).Nome + " " + Model.Alunos.SingleOrDefault(x => x.UserId == item.RemetenteId).Apelido;
+            }
+            if (Model.Alunos.Any(x => x.UserId == item.DestinarioId))
+            {
+                destinatario = Model.Alunos.SingleOrDefault(x => x.UserId == item.DestinarioId).Nome + " " + Model.Alunos.SingleOrDefault(x => x.UserId == item.DestinarioId).Apelido;
+            }
+        }
+        <td>
+            @remetente
+        </td>
+        <td>
+            @destinatario
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data.Day)/@Html.DisplayFor(modelItem => item.Data.Month)/@Html.DisplayFor(modelItem => item.Data.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data.Hour):@Html.DisplayFor(modelItem => item.Data.Minute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        @{
+            if (item.StatusMensagem.ToString() == "Entregue")
+            {
+                <td align="center" style="text-align:left; font-size:200%; font-weight:bold; color:green;">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </td>
+            }
+            else
+            {
+                <td align="center" style="text-align:left; font-size:200%; font-weight:bold; color:red;">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </td>
+            }
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Conteudo)
+        </td>
+    </tr>
+    }
+
+</table>
+

@@ -1,0 +1,106 @@
+﻿@model DEIS_ESTAGIOS.Models.Proposta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes da Proposta</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        @if (User.IsInRole("Empresa"))
+        {
+            <dt>
+                Empresa
+            </dt>
+
+
+            <dd>
+                @Html.DisplayFor(model => model.Empresa.Nome)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ramo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enquadramento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enquadramento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Objectivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Objectivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CondicoesAcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CondicoesAcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localizacao)
+        </dd>
+
+        <dt>
+            Início
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+
+        <dt>
+            Término
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+
+    </dl>
+</div>
+<p>
+        @if (User.IsInRole("Alunos"))
+        {
+            @Html.ActionLink("Candidatar", "Create", "Candidaturas", new { id = Model.PropostaId }, new { @class = "btn btn-info btn-md" })
+            @Html.ActionLink("Voltar a lista", "ListaPropostas", "Alunos", null,new { @class = "btn btn-info btn-md" })
+        }
+        @if (User.IsInRole("Comissao") || User.IsInRole("Docentes") || User.IsInRole("Empresas"))
+        {
+            @Html.ActionLink("Voltar a lista", "MinhasPropostas", routeValues: null, htmlAttributes: new { @class = "btn btn-info btn-md", style = "white-space: normal" })
+        }
+</p>

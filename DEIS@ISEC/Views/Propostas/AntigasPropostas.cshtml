@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Proposta>
+
+@{
+    ViewBag.Title = "ListaPropostas";
+}
+
+<h2>Lista de Propostas já definidas</h2>
+
+<p>
+    @Html.ActionLink("Inserir Nova Proposta", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Título
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ramo)
+            </td>
+            <td>
+                @Html.ActionLink("Detailhes", "Details", "Propostas", new { id = item.PropostaId }, null) |
+                @Html.ActionLink("Apagar", "Delete", "Propostas", new { id = item.PropostaId }, null)
+            </td>
+        </tr>
+    }
+
+</table>

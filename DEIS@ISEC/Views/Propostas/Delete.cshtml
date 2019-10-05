@@ -1,0 +1,94 @@
+﻿@model DEIS_ESTAGIOS.Models.Proposta
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>De certeza que pretende eliminar a proposta?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ramo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enquadramento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enquadramento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Objectivos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Objectivos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CondicoesAcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CondicoesAcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Apagar" class="btn btn-info btn-md" />
+        @Html.ActionLink("Voltar", "MinhasPropostas", null,new { @class = "btn btn-info btn-md" })
+    </div>
+    }
+</div>

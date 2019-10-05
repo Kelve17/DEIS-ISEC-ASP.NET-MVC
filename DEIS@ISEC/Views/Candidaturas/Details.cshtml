@@ -1,0 +1,33 @@
+﻿@model DEIS_ESTAGIOS.Models.Candidatura
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Detailhes da sua candidatura</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisciplinasNaoConcluidas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisciplinasConcluidas)
+        </dd>
+
+    </dl>
+</div>
+<p>
+        @Html.ActionLink("Editar", "Edit", "Candidaturas", new { id = ViewBag.CandidaturaId }, new{@class="btn btn-info btn-md"})
+        @Html.ActionLink("Voltar", "MinhasCandidaturas", null,new { @class = "btn btn-info btn-md" })
+</p>

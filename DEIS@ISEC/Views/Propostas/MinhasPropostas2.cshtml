@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Proposta>
+
+@{
+    ViewBag.Title = "ListaPropostas";
+}
+
+<h2>Lista de Candidaturas por propostas </h2>
+
+<p>
+    @Html.ActionLink("Inserir Nova Proposta", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        @if (User.IsInRole("Empresas"))
+        {
+        <th>
+            Empresa
+        </th>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ramo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        @if (User.IsInRole("Empresas"))
+        {
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa.Nome)
+        </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localizacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ramo)
+        </td>
+        <td>
+            @Html.ActionLink("Ver Candidaturas", "CandidaturasPorProposta", "Candidaturas", new { id = item.PropostaId }, new { @class = "btn btn-info btn-md" })
+        </td>
+    </tr>
+    }
+
+</table>

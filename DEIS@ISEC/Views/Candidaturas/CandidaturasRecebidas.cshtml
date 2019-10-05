@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DEIS_ESTAGIOS.Models.Candidatura>
+@using DEIS_ESTAGIOS.Models
+
+<h2>Candidaturas recebidas</h2>
+<table class="table">
+    <tr>
+        <th>
+            Aluno
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NivelPreferencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasNaoConcluidas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinasConcluidas)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+    <tr>
+        @{
+            var aluno = (List<Aluno>)ViewBag.Alunos;
+            var nomeALuno = aluno.SingleOrDefault(x => x.AlunoId == item.AlunoId).Nome+" "+ aluno.SingleOrDefault(x => x.AlunoId == item.AlunoId).Apelido;
+        }
+        <td>
+            @nomeALuno
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NivelPreferencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasNaoConcluidas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinasConcluidas)
+        </td>
+        <td>
+            @if (User.IsInRole("Empresas"))
+            {
+                @Html.ActionLink("Aprovar", "AceitarCandidatura", new { controller = "Empresas", id = item.CandidaturaId }, new { @class = "btn btn-info btn-md" })
+            }
+            @if (User.IsInRole("Comissao") || User.IsInRole("Docentes"))
+            {
+                @Html.ActionLink("Aprovar", "AceitarCandidatura", new { controller = "Docentes", id = item.CandidaturaId }, new { @class = "btn btn-info btn-md" })
+
+            }
+        </td>
+    </tr>
+    }
+
+</table>
